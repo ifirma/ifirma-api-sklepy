@@ -1,11 +1,11 @@
 IFIRMA API - OpenCart
 =====================
 
-- Aby zainstalować OpenCart (opis wykonany do wersji `OpenCart_v.1.4.9.4`), należy mieć dostęp do zdalnego serwera internetowego lub do lokalnego serwera na komputerze (MAMP – dla Mac OS-a, LAMP – dla Linuksa, WAMP – dla Windows), z zainstalowanym systemem bazodanowym, jak np. MySQL.
+- Aby zainstalować OpenCart, należy mieć dostęp do zdalnego serwera internetowego lub do lokalnego serwera na komputerze (MAMP – dla Mac OS-a, LAMP – dla Linuksa, WAMP – dla Windows), z zainstalowanym systemem bazodanowym, jak np. MySQL.
 
 - Za pośrednictwem phpMyAdmin (panelu administracyjnego systemu bazodanowego) tworzymy bazę danych, którą wpisujemy od instalatora OpenCarta. Panel administracyjny phphMyAdmin pozycja MYSQL localhost > Utwórz nową bazę danych> "podajemy własną nazwę (np. baza opencart)".
 
-- Następnie pobieramy darmowe oprogramowanie sklepu internetowego OpenCart ze strony internetowej www.opencart.com zakładka download (`v.1.4.9.4`).
+- Następnie pobieramy darmowe oprogramowanie sklepu internetowego OpenCart ze strony internetowej www.opencart.com zakładka download (odpowiednia wersja).
 
 - Kopiujemy rozpakowaną bazę sklepu na serwer. Wchodzimy na naszą domenę np. http://www.nasza_domena.pl i rozpoczynamy instalację postepując zgodnie ze wskazówkami wyświetlanymi na ekranie, wpisując w Database configuration:
 
