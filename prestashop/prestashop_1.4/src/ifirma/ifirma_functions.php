@@ -390,7 +390,7 @@ function handle_document_generation($cart_order_id,$invoice, $url,$document_type
 	$faktura_do_poprawki = false;
 	//jeden grosz- przed wyslaniem -roznica spos zaokraglania
 	
-	echo "po wyjsciu z funkcji: ".$invoice->getZaplacono();
+	//echo "po wyjsciu z funkcji: ".$invoice->getZaplacono();
 	//end jeden grosz
 	ustaw_odpowiedni_miesiac_ksiegowy($invoice,$connection_parameters); 
 	$rsp = wyslij_jedna($typ_pliku,$content,$klucz,$url,$nazwaUsera,$nazwaKlucza,$curlWysylanieHandle);
