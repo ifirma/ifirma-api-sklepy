@@ -2,7 +2,7 @@ IFIRMA API - PrestaShop
 =======================
 
 
-- Aby zainstalować PrestaShop (opis wykonany do wersji `PrestaShopPL_1.4`), należy mieć dostęp do zdalnego serwera internetowego lub do lokalnego serwera na komputerze (MAMP – dla Mac OS-a, LAMP – dla Linuksa, WAMP – dla Windows) z zainstalowanym system bazodanowym, jak np. MySQL.
+- Aby zainstalować PrestaShop, należy mieć dostęp do zdalnego serwera internetowego lub do lokalnego serwera na komputerze (MAMP – dla Mac OS-a, LAMP – dla Linuksa, WAMP – dla Windows) z zainstalowanym system bazodanowym, jak np. MySQL.
 
 - Za pośrednictwem phpMyAdmin (panelu administracyjnego systemu bazodanowego) tworzymy bazę danych, którą wpisujemy do instalatora PrestaShopu. Panel administracyjny phphMyAdmin pozycja MYSQL localhost > Utwórz nową bazę danych> podajemy własną nazwę (np. baza prestashop).
 
