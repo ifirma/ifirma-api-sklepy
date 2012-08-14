@@ -1,0 +1,57 @@
+
+<config>
+	<modules>
+		<PowerMedia_Ifirma>
+			<version>0.1.0</version>
+		</PowerMedia_Ifirma>
+	</modules>
+
+	<admin>
+		<routers>
+			<Ifirma>
+				<use>admin</use>
+				<args>
+					<module>PowerMedia_Ifirma</module>
+					<frontName>ifirma</frontName>
+				</args>
+			</Ifirma>
+		</routers>
+	</admin>
+	<global>
+		<models>
+			<ifirma>
+				<class>PowerMedia_Ifirma_Model</class>
+				<resourceModel>ifirma_mysql4</resourceModel>
+			</ifirma>
+			
+			<ifirma_mysql4>
+				<class>PowerMedia_Ifirma_Model_Mysql4</class>
+				<entities>
+					<ifirma>
+						<table>ifirma</table>
+					</ifirma>
+				</entities>
+			</ifirma_mysql4>
+		</models>
+		<helpers>
+			<ifirma>
+				<class>PowerMedia_Ifirma_Helper</class>
+			</ifirma>
+		</helpers>
+	</global>
+	<adminhtml>
+		<menu>
+			<ifirma_menu translate="title" module="ifirma">
+				<title>IFirma</title> 
+				<sort_order>9999</sort_order>
+				<children>
+					<first_page module="ifirma" >
+						<title>Konfiguracja Api</title> 
+						<action>ifirma/invoice/api</action>
+						<hide>1</hide>
+					</first_page>
+				</children>
+			</ifirma_menu>
+		</menu> 
+	</adminhtml>
+</config>

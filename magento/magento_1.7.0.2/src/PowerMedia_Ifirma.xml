@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+		<PowerMedia_Ifirma>
+			<active>true</active>
+            <codePool>local</codePool>
+		</PowerMedia_Ifirma>
+    </modules>
+</config>
