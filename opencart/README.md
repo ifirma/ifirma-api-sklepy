@@ -1,33 +1,33 @@
-IFIRMA API - OpenCart
-=====================
+• Jeśli masz już swój sklep OpenCart, przejdź do punktu 2. Jeśli nie masz sklepu - zainstaluj aplikację OpenCart na swoim hostingu, wybierając do instalacji wersję 1.5.3.1 (wtyczka integracyjna do ifirma.pl została przygotowana właśnie dla tej wersji oprogramowania sklepu. Oprogramowanie sklepu możesz pobrać np. ze strony OpenCart (http://www.opencart.com/).
 
-- Aby zainstalować OpenCart, należy mieć dostęp do zdalnego serwera internetowego lub do lokalnego serwera na komputerze (MAMP – dla Mac OS-a, LAMP – dla Linuksa, WAMP – dla Windows), z zainstalowanym systemem bazodanowym, jak np. MySQL.
+• Pobierz przygotowaną przez ifirma.pl wtyczkę do integracji z OpenCart.
 
-- Za pośrednictwem phpMyAdmin (panelu administracyjnego systemu bazodanowego) tworzymy bazę danych, którą wpisujemy od instalatora OpenCarta. Panel administracyjny phphMyAdmin pozycja MYSQL localhost > Utwórz nową bazę danych> "podajemy własną nazwę (np. baza opencart)".
+• Korzystając z menedżera FTP (np. FileZilla), w sklepie OpenCart, który wgrałeś na serwer, wejdź do katalogu o nazwie „sale”: admin/view/template/sale i wgraj do niego pliki z pobranej wcześniej wtyczki dla sklepu OpenCart 1.5.3.1:
 
-- Następnie pobieramy darmowe oprogramowanie sklepu internetowego OpenCart ze strony internetowej www.opencart.com zakładka download (odpowiednia wersja).
+folder „ifirma” (wgrać cały folder, a nie jego poszczególne pliki)
+api_configuration.php
+api_request.php
+config.ini
+download.php
+order_list.tpl
+setting.tpl
 
-- Kopiujemy rozpakowaną bazę sklepu na serwer. Wchodzimy na naszą domenę np. http://www.nasza_domena.pl i rozpoczynamy instalację postepując zgodnie ze wskazówkami wyświetlanymi na ekranie, wpisując w Database configuration:
+• Zatwierdź podmianę pliku order_list.tpl.
 
-	nazwę bazy danych serwera (np. localhost),
-	nazwę bazy danych stworzoną z poziomu administratora phpMyAdmin (np. baza opencart),
-	login jaki podajemy łącząc się z bazą danych phpMyAdmin (np. root),
-	hasło jakie podajemy łącząc się z bazą danych phpMyAdmin (np. root).
-Dalej postępujemy zgodnie z komunikatami pojawiającymi podczas instalacji, po której ze względów bezpieczeństwa usuwamy z serwera katalog install oraz zmieniamy nazwę katalogu admin na własną (np. admin123)
+• Plik setting.tpl podmień dodatkowo w katalogu: admin/view/template/setting/setting.tpl.
 
-- Następnie stąd pobieramy pliki niezbędne do integracji sklepu internetowego z ifirma.pl. Do naszego folderu (np. admin123) należy skopiować:
+• Wszystkie wgrane pliki (oraz katalog „ifirma”) powinny mieć uprawnienia “755”, prócz pliku config.ini, który powinien mieć uprawnienia „777”. Uprawnienia możesz edytować z poziomu menedżera FTP (zaznacz plik, kliknij prawym przyciskiem myszy i wybierz opcję „Prawa pliku”, wprowadź odpowiednią wartość uprawnienia i zatwierdź przyciskiem „OK”).
 
-	folder ifirma/*
-	api_configuration.php
-	api_request.php
-	config.ini
-	download.php
-	do podmiany/modyfikacji jest plik OpenCart admin/view/template/sale/order_list.tpl
+• Plik 001_ifirma_invoice_map.sql (w katalogu „ifirma”) zawiera zapytanie, które należy wysłać do stworzonej bazy danych sklepu OpenCart:
 
-- wszystkie pliki powinny mieć odpowiednie uprawnienia (755, a w przypadku config.ini 777). (przykładowa komenda chmod 755 api_request.php)
+skopiowaną treść zapytania wklej do edytora zapytań MySQL z poziomu bazy danych, w phpMyAdmin: zakładka „SQL”, okno „wykonanie zapytań SQL do bazy danych”, zatwierdź przyciskiem „ wykonaj”. Utworzone zostaną tabele potrzebne do integracji.
 
-- `001_ifirma_invoice_map.sql` zawiera zapytanie, które należy wysłać do stworzonej bazy danych OpenCart. Treść zapytania można wkleić np. do edytora zapytań MySQL z poziomu narzędzi administracyjnych bazy danych, takich jak phpMyAdmin. Utworzone zostaną niezbędne tabele potrzebne do integracji. Dodatkowo wykonanie tego zapytania utworzy dodatkową tabelę w bazie danych.
+• Teraz zaloguj się do panelu administracyjnego sklepu OpenCart, przejdź do zakładki System > Settings > Store, link na dole strony „Konfiguracja”. W celu skonfigurowania ustawień API, uzupełnij pola danymi pobranymi z Twojego konta w ifirma.pl (jeśli nie masz konta w ifirma.pl - zarejestruj się (https://www.ifirma.pl/cgi-bin/WebObjects/ifirma.woa/wa/register): administracja > ustawienia > ustawienia > klucze autoryzacji, sekcja „symetryczne klucze autoryzacji”):
 
-- Przed skorzystaniem z API należy dokonać konfiguracji za pomocą wygenerowanych uprzednio w ifirma.pl kluczy symetrycznych dla abonenta i faktury oraz za pomocą swojego loginu do serwisu ifirma.pl. Konfiguracji dokonać należy z poziomu panelu administratora sklepu (zakładka Sales->Orders-> Konfiguracja API).
+klucz do API – faktura,
+klucz do API – abonent,
+login do API (login w ifirma.pl).
 
-- Następnie można już wystawić fakturę, która pojawi się w przychodach na naszym koncie w serwisie ifirma.pl
+• Zapisz wprowadzone parametry. Pamiętaj, że jeśli w ifirma.pl przegenerujesz klucze autoryzacji, konieczne będzie wprowadzenie tych nowych kluczy również w konfiguracji API ifirma.pl sklepu OpenCart – zgodnie ze schematem przedstawionym w punkcie 8. Jeśli chcesz zintegrować z ifirma.pl inne sklepy, wszędzie użyj tych samych kluczy autoryzacji.
+
+• Dla zamówień złożonych w Twoim zintegrowanym z ifirma.pl sklepie (Sales > Orders) można teraz wystawić fakturę (lub fakturę wysyłkowa), która zostanie automatycznie przesłana do ifirma.pl, gdzie będzie można ją zaksięgować.
