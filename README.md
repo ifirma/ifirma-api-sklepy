@@ -6,6 +6,7 @@ W poniższych folderach znajdują się podstawowe moduły integrujące sklepy:
  - openCart
  - osComerce
  - PrestaShop
+ - Magento
 
 z api ifirma.pl.
 
