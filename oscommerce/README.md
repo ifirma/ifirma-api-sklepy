@@ -1,35 +1,60 @@
-IFIRMA API - osComerce
+Instalacja sklepu (dla FTP):
 
-- Aby zainstalować osCommerce (opis wykonany do wersji `osCommerce 2.3.1`), należy mieć dostęp do zdalnego serwera internetowego lub do lokalnego serwera na komputerze (MAMP – dla Mac OS-a, LAMP – dla Linuksa, WAMP – dla Windows) z zainstalowanym system bazodanowym, jak np. MySQL.
+• Pobierz osCommerce 2.3.2.
 
-- Za pośrednictwem phpMyAdmin (panelu administracyjnego systemu bazodanowego) tworzymy bazę danych, którą wpisujemy do instalatora osCommerce. Panel administracyjny phphMyAdmin pozycja MYSQL localhost > Utwórz nową bazę danych> podajemy własną nazwę (np. „baza oscommerce”).
+• Rozpakuj pliki na dysku.
 
-- Następnie pobieramy darmowe oprogramowanie sklepu internetowego osCommerce ze strony www.oscommerce.com/solutions/downloads (`osCommerce online Merchant v2.3.1`). Kopiujemy rozpakowaną bazę sklepu na serwer.
+• Zawartość folderu „catalog/” wgraj do katalogu głównego serwera (przy użyciu FTP). Można też wgrać pliki do subfolderu utworzonego w katalogu głównym np. http://www.mojastrona.pl/oscommerce.
 
-- Dwóm plikom nadajemy odpowiednie uprawnienia:
+Instalacja sklepu (dla DirectAdmin):
 
-/nasz_katalog/includes/configure.php > chmod 777 includes/configure.php
-/nasz_katalog/admin/includes/configure.php > chmod 777 admin/includes/configure.php
-Wchodzimy na naszą domenę np. http://www.nasza_domena.pl i rozpoczynamy instalację zgodnie ze wskazówkami wyświetlanymi na ekranie podając w Database configuration:
+• Zaloguj się na swoją domenę w panelu DirectAdmin. Aby to zrobić, wpisz w przeglądarkę internetową adres swojej domeny i dodaj do niego ':2222' np. przykladowa_domena.pl:2222.
 
-nazwę bazy danych serwera (np. localhost),
-login jaki podajemy łącząc się z bazą danych phpMyAdmin (np. root)
-hasło jaki podajemy łącząc się z bazą danych phpMyAdmin (np. root),
-nazwę bazy danych stworzoną z poziomu administratora phpMyAdmin (np. baza oscommerce).
-Dalej postępujemy zgodnie z komunikatami pojawiającymi się w miarę procesu instalacji, po której ze względów bezpieczeństwa usuwamy z serwera katalog install oraz zmieniamy nazwę katalogu admin na inną (np. admin123).
+• Z menu 'Web Applications' wybierz 'zobacz więcej', sklep osCommerce znajdziesz w 'Aplikacje dla e-Commerce i Biznes'.
 
-- Ponownie zmieniamy uprawnienia do plików:
+• Wybierz sklep i kliknij 'instaluj tą aplikację'. Ustal domenę i wybierz wersję sklepu. Najlepiej wybrać osCommerce 2.3.1 – pod nią została stworzona wtyczka integrująca. Po ustawieniu wszystkich parametrów kliknij 'Zainstaluj'.
 
-/nasz_katalog/includes/configure.php > chmod 644 includes/configure.php
-/nasz_katalog/admin/includes/configure.php > chmod 644 admin/includes/configure.php
-Następnie stąd pobieramy pliki niezbędne do integracji sklepu internetowego z ifirma.pl. Do naszego folderu (np. admin123) należy skopiować:
+Sklep zostanie zainstalowany na naszej domenie. Kolejnym krokiem jest jego integracja z ifirma.pl.
 
-folder ifirma/* pliki: - api_configuration.php - api_request.php - config.ini - download.php - orders.php
+Instalacja wtyczki:
 
-- Wszystkie pliki powinny mieć odpowiednie uprawnienia (755, a w przypadku config.ini 777). (przykładowa komenda chmod 755 api_request.php)
+• Pobierz wtyczkę. Wybierz opcję 'Download' i format pliku (.zip lub tar.gz). Przy wyborze 'tar.gz' na dysku zostanie zapisany folder o nazwie 'ifirma-ifirma-api-sklepy-89a9f26'. Przy wyborze '.zip' zapisany zostanie plik, który po rozpakowaniu stworzy taki sam folder. Znajdziemy w nim pliki niezbędne do integracji sklepu z ifirma.pl.
 
-- Plik `001_ifirma_invoice_map.sql` zawiera zapytanie, które należy wysłać do stworzonej bazy danych osCommerce. Treść zapytania można wkleić np. do edytora zapytań MySQL z poziomu narzędzi administracyjnych bazy danych takich jak phpMyAdmin. Stworzone zostaną niezbędne tabele potrzebne do integracji. Dodatkowo wykonanie tego zapytania utworzy dodatkową tabelę w bazie danych.
+• Wtyczkę trzeba skopiować do katalogu admin' za pomocą FTP.
 
-- Przed skorzystaniem z API należy dokonać konfiguracji za pomocą wygenerowanych uprzednio w serwisie ifirma.pl kluczy symetrycznych dla abonenta i faktury oraz za pomocą swojego loginu do serwisu ifirma.pl. Konfiguracji należy przeprowadzić z poziomu panelu administratora sklepu (zakładka Customers->Orders->konfiguracja API).
+• Z folderu, który wcześniej ściągnęliśmy z Github należy wgrać pliki:
 
-- Następnie można już wystawić fakturę, która pojawi się w przychodach na naszym koncie w ifirma.pl
+api_configuration.php
+api_request.php
+config.ini
+download.php
+orders.php
+Wgraj też FOLDER (nie pliki z foldera, a folder) 'ifirma'.
+
+• Plik "configuration.php" podmieniamy w "catalog/admin/includes/boxes/configuration.php".
+
+• Zmień uprawnienia wszystkim wgranym plikom (również tym w folderze 'ifirma'). Zaznacz je (klikając w kwadraciki po prawej stronie listy). Na dole strony wybierz opcję 'Ustaw uprawnienia' w okienko obok wpisując 755. Plikowi o nazwie 'config.ini' dajemy uprawnienia równe 777.
+
+• Plik '001_ifirma_invoice_map.sql' zawiera zapytanie, które musimy wysłać do bazy danych naszego sklepu. Aby to zrobić należy:
+
+• Zalogować się do phpMyAdmin.
+• Wybrać bazę danych osCommerce, która domyślnie zapisana jest jako '_osco1'
+
+• Wybrać zakładkę 'SQL'.
+
+• Wkleić treść pliku '001_ifirma_invoice_map.sql' i kliknąć opcję 'Wykonaj'.
+
+• Przed skorzystaniem z API należy je skonfigurować za pomocą wygenerowanych w ifirma kluczy autoryzacyjnych. Aby wygenerować klucz należy:
+
+Zalogować się w ifirma.pl.
+Wybrać menu 'administracja' > 'ustawienia' > 'ustawienia' > 'klucze autoryzacji'.
+Wygenerować dwa klucze symetryczne, jeden dla abonenta, drugi dla faktury.
+W przypadku integracji kilku sklepów z jednym kontem ifirma należy użyć tych samych kluczy autoryzacyjnych.
+
+Integracja API:
+• Zaloguj się w panelu administracyjnym swojego sklepu.
+• Kliknij "Configuration" > "Ifirma konfiguracja".
+• Wklej wcześniej wygenerowane klucze, podaj login, którego używasz w ifirma i zapisz parametry.
+• Aby wystawić fakturę wybierz "Customers" > "Orders".
+
+Integracja osCommerce z ifirma.pl została ukończona. Teraz przy każdym zamówieniu będzie można użyć opcji 'wystaw fakturę' lub 'wystaw fakturę wysyłkową'. Taka faktura pojawi się w menu 'Przychody' w aplikacji ifirma.
