@@ -78,7 +78,7 @@ class PowerMedia_Ifirma_InvoiceController extends Mage_Adminhtml_Controller_Acti
 		try {
 			$this->setAccountancyMonth(substr($creation_date, 5, 2), substr($creation_date, 0, 4), $config);
 			$response = $this->sendInvoiceCreationRequest($invoice, $config);
-			Zend_Debug::dump($response);
+			
 			if ($response['response']['Kod'] != 0) {
 				Mage::getSingleton('core/session')->addError('Nie udało się wystawić faktury!');
 				$this->_redirectReferer();
@@ -92,7 +92,7 @@ class PowerMedia_Ifirma_InvoiceController extends Mage_Adminhtml_Controller_Acti
 			$this->saveDocumentDataFromResponse($response, $type, $order_id);
 			//$this->verifyInvoice($invoice, $order);
 		} catch (Zend_Exception $e) {
-			Mage::getSingleton('core/session')->addError('Nie udało się wystawić faktury!'.$e->getMessage());
+			Mage::getSingleton('core/session')->addError('Wystąpił błąd: '.$e->getMessage());
 			$this->_redirectReferer();
 		}
 		if ($response['response']['Kod'] == 0) {
@@ -394,6 +394,9 @@ class PowerMedia_Ifirma_InvoiceController extends Mage_Adminhtml_Controller_Acti
 			'invoice_number' => $response['Identyfikator'],
 			'order_id' => $order_id
 		);
+		if(empty($response['Identyfikator'])){
+			throw new Zend_Exception($response['Informacja']);
+                }
 		$row->addData($arr);
 		try {
 			$row->save();

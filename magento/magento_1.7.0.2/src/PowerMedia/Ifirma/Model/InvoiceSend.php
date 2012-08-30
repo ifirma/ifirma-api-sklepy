@@ -219,7 +219,7 @@ class PowerMedia_Ifirma_Model_InvoiceSend {
 		$this->setWidocznyNumerGios(true);
 		$this->setZaplacono('0');
 		$this->setTerminPlatnosci('');
-		$items = $order->getAllItems();
+		$items = $order->getAllVisibleItems();
 		$positions=array();
 		foreach ($items as $item) {
 			/* @var $item Mage_Sales_Model_Order_Item */

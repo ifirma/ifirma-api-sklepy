@@ -229,7 +229,7 @@ class PowerMedia_Ifirma_Model_Invoice {
 		$this->setZaplacono($order->getGrandTotal());
 		$this->setSpozobZaplaty("PRZ");
 		$this->setTerminPlatnosci('');
-		$items = $order->getAllItems();
+		$items = $order->getAllVisibleItems();
 		$positions=array();
 		foreach ($items as $item) {
 			/* @var $item Mage_Sales_Model_Order_Item */
