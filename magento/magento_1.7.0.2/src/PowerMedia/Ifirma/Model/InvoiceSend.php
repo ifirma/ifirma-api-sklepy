@@ -224,7 +224,8 @@ class PowerMedia_Ifirma_Model_InvoiceSend {
 		foreach ($items as $item) {
 			/* @var $item Mage_Sales_Model_Order_Item */
 			$invoice_position = new PowerMedia_Ifirma_Model_InvoicePosition();
-			$invoice_position->setStawkaVat((string)floor($item->getTaxPercent()));
+			$tax = sprintf('%.2f',($item->getTaxPercent()/100));
+			$invoice_position->setStawkaVat((string)$tax);
 			$invoice_position->setIlosc($item->getQtyOrdered());
 			$invoice_position->setNazwaPelna($item->getName());
 			$invoice_position->setJednostka("sztuk");
@@ -237,7 +238,8 @@ class PowerMedia_Ifirma_Model_InvoiceSend {
 		if($shipping >= 0){
 			/* @var $item Mage_Sales_Model_Order_Item */
 			$invoice_position = new PowerMedia_Ifirma_Model_InvoicePosition();
-			$invoice_position->setStawkaVat((string)floor($item->getTaxPercent()));
+			$tax = sprintf('%.2f',($item->getTaxPercent()/100));
+			$invoice_position->setStawkaVat((string)$tax);
 			$invoice_position->setIlosc(1);
 			$invoice_position->setNazwaPelna('Koszty dostawy');
 			$invoice_position->setJednostka("sztuk");
