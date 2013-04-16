@@ -1,0 +1,1 @@
+wtyczka kompatybilna z Prestashop 1.4+ (poprawka wykoana przez ImpSolutions)
