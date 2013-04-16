@@ -1,5 +1,5 @@
 Instalacja sklepu (dla FTP):
-- Pobierz PrestaShop w wersji 1.4.lub 1.5
+- Pobierz PrestaShop w wersji 1.5
 - Rozpakuj pliki na dysku
 - Zawartość rozpakowanego folderu /prestashop (nie sam folder) wgraj do katalogu głównego serwera (przy użyciu FTP). Można też wgrać pliki do subfolderu utworzonego w katalogu głównym np. http://www.mojastrona.pl/prestashop
 - Sprawdź czy foldery /config, /upload, /download, /tools/smarty/compile maja uprawnienia „write” (inaczej „CHMOD 777”). Jeśli trzeba, nadaj im atrybut „write” razem z ich podfolderami: /img, /mails, /modules, /themes/prestashop/lang, /translations
@@ -13,7 +13,7 @@ Instalacja sklepu (dla DirectAdmin):
 Sklep zostanie zainstalowany na naszej domenie. Kolejnym krokiem jest jego integracja z ifirma.pl
 
 Instalacja wtyczki:
-- Pobierz wtyczkę (dla wersji PrestaShop 1.4 oraz 1.5)
+- Pobierz wtyczkę (dla wersji PrestaShop 1.5)
 - W panelu administracyjnym sklepu w zakładce ,Moduły' wywołaj akcję 'dodaj nowy moduł'
 - Wybierz z dysku i prześlij wtyczkę w formacie .zip (cały folder)
 - W konfiguracji modułu wprowadź dane niezbędne dla prawidłowego działania integracji (login oraz klucze autoryzacji należy pobrać z ifirma.pl)
