@@ -51,5 +51,5 @@
 
 <fieldset class="width4" style="margin: 0 auto;">
 	<legend><img src="{$adminImg}comment.gif" alt="Informacje">Informacje</legend>
-	<p>Blog ifirma.php - <a target="_blank" href="http://blog.ifirma.pl/">odwiedź</a></p>
+	<p>Blog ifirma - <a target="_blank" href="http://blog.ifirma.pl/">odwiedź</a></p>
 </fieldset>
