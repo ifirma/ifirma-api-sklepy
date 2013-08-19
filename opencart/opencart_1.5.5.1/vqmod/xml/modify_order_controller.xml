@@ -1,0 +1,83 @@
+<modification>
+	<id><![CDATA[Modify order controller]]></id>
+	<version><![CDATA[1.0.0]]></version>
+	<vqmver><![CDATA[2.3.2]]></vqmver>
+	<author><![CDATA[PowerMedia]]></author>
+	<file path="admin/controller/sale/" name="order.php">
+		<operation info="Test">
+			<search position="before"><![CDATA[class ControllerSaleOrder]]></search>
+			<add><![CDATA[require_once dirname(__FILE__) . '/../../admin/model/module/invoice_map.php';
+                                require_once dirname(__FILE__) . '/../../manager/ApiManager.php';]]></add>
+		</operation>
+		<operation info="Add IFirma tab label to order controller">
+			<search position="after"><![CDATA[$this->data['tab_history'] = $this->language->get('tab_history');]]></search>
+			<add><![CDATA[$this->language->load('module/ifi_invoice');
+                                $this->data['tab_ifirma'] = $this->language->get('tab_ifirma');
+                                $this->data['configuration_not_set_msg'] = $this->language->get('configuration_not_set');
+                                $this->language->load('sale/order');]]></add>
+		</operation>
+		<operation info="Add links to order controller">
+			<search position="before"><![CDATA[$this->data['shipping_country'] = $order_info['shipping_country'];]]></search>
+			<add><![CDATA[$this->load->model('module/invoice_map');
+			$this->load->model('setting/setting');
+                        $isIfiModuleInstalled = $this->model_module_invoice_map->isModuleInstalled();
+			$this->data['isIfiModuleInstalled'] = $isIfiModuleInstalled;
+                        if ($isIfiModuleInstalled){
+                            $invoiceMapCollection = $this->model_module_invoice_map->getInvoiceMapRowsForOrderId($order_id);
+                            $ifi_invoice = $this->model_setting_setting->getSetting('ifi_invoice');
+			    $data = array('hash' => $ifi_invoice[ModelModuleInvoiceMap::API_HASH],
+                                'isVat' => array_key_exists(ModelModuleInvoiceMap::API_VAT, $ifi_invoice) && $ifi_invoice[ModelModuleInvoiceMap::API_VAT],
+                                'invoice' => $invoiceMapCollection->{ModelModuleInvoiceMap::INVOICE_TYPE_NORMAL},
+                                'invoiceSend' => $invoiceMapCollection->{ModelModuleInvoiceMap::INVOICE_TYPE_SEND},
+                                'invoiceProforma' => $invoiceMapCollection->{ModelModuleInvoiceMap::INVOICE_TYPE_PROFORMA},
+                                'bill' => $invoiceMapCollection->{ModelModuleInvoiceMap::INVOICE_TYPE_BILL},
+                                'actionInvoice' => ApiManager::KEY_ACTION_INVOICE,
+                                'actionInvoiceSend' => ApiManager::KEY_ACTION_INVOICE_SEND,
+                                'actionInvoiceProforma' => ApiManager::KEY_ACTION_INVOICE_PROFORMA,
+                                'actionInvoiceFromProforma' => ApiManager::KEY_ACTION_INVOICE_FROM_PROFORMA,
+                                'actionBill' => ApiManager::KEY_ACTION_BILL,
+                            );
+                            foreach ($data as $key => $value) {
+                                    $this->data[$key] = $value;
+                            }
+                            if (isset($this->session->data['success'])) {
+                                $this->data['success'] = $this->session->data['success'];		
+                                unset($this->session->data['success']);
+                            }
+                            if (isset($this->session->data['error_warning'])) {
+                                $this->data['error_warning'] = $this->session->data['error_warning'];		
+                                unset($this->session->data['error_warning']);
+                            }
+
+                            if (!$this->isConfigurationSet()){
+                                $this->data['ifi_configuration_not_set'] = true; 
+                            }
+
+                            $this->data['send_invoice'] = $this->url->link('module/ifi_invoice/sendInvoice', 'token=' . $this->session->data['token'], 'SSL');
+                            $this->data['send_invoice_send'] = $this->url->link('module/ifi_invoice/sendInvoice', 'token=' . $this->session->data['token'], 'SSL');
+                            $this->data['send_invoice_proforma'] = $this->url->link('module/ifi_invoice/sendInvoice', 'token=' . $this->session->data['token'], 'SSL');
+                            $this->data['send_proforma'] = $this->url->link('module/ifi_invoice/sendInvoice', 'token=' . $this->session->data['token'], 'SSL');
+                            $this->data['get_invoice'] = $this->url->link('module/ifi_invoice/getInvoice', 'token=' . $this->session->data['token'], 'SSL');
+                            $this->data['get_invoice_send'] = $this->url->link('module/ifi_invoice/getInvoice', 'token=' . $this->session->data['token'], 'SSL');
+                            $this->data['get_invoice_proforma'] = $this->url->link('module/ifi_invoice/getInvoice', 'token=' . $this->session->data['token'], 'SSL');
+                            $this->data['get_proforma'] = $this->url->link('module/ifi_invoice/getInvoice', 'token=' . $this->session->data['token'], 'SSL');}]]></add>
+		</operation>
+                <operation info="Add get configuration function">
+			<search position="before"><![CDATA[public function invoice()]]></search>
+			<add><![CDATA[/**
+                            * @return bool
+                            */
+                            private function isConfigurationSet(){
+                                   $settings = $this->model_setting_setting->getSetting('ifi_invoice');
+                                   return $settings[ModelModuleInvoiceMap::API_LOGIN]
+                                                   &&
+                                                   $settings[ModelModuleInvoiceMap::API_KEY_SUBSCRIBER]
+                                                   &&
+                                                   $settings[ModelModuleInvoiceMap::API_KEY_INVOICE]
+                                                   &&
+                                                   $settings[ModelModuleInvoiceMap::API_KEY_BILL]
+                                                   ;
+                                   }]]></add>
+                </operation>        
+	</file>
+</modification>

@@ -1,0 +1,16 @@
+<modification>
+	<id><![CDATA[Add IFirma tab to order info template]]></id>
+	<version><![CDATA[1.0.0]]></version>
+	<vqmver><![CDATA[2.3.2]]></vqmver>
+	<author><![CDATA[PowerMedia]]></author>
+	<file path="admin/view/template/sale/" name="order_info.tpl">
+		<operation info="Add IFirma tab to order info template">
+			<search position="after"><![CDATA[<a href="#tab-history"><?php echo $tab_history; ?></a>]]></search>
+			<add><![CDATA[<?php if ($isIfiModuleInstalled): ?><a href="#tab-ifirma"><?php echo $tab_ifirma; ?></a><?php endif; ?>]]></add>                        
+		</operation>
+                <operation info="Add flash box">
+                    <search position="before"><![CDATA[<div class="box">]]></search>
+                    <add><![CDATA[<?php if ($isIfiModuleInstalled): ?><?php if (isset($error_warning)):?><div class="warning"><?php echo $error_warning; ?></div><?php endif; ?><?php if (isset($success)):?><div class="success"><?php echo $success; ?></div><?php endif; ?><?php endif; ?>]]></add>
+                </operation>
+	</file>
+</modification>

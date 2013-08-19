@@ -1,0 +1,54 @@
+<modification>
+	<id><![CDATA[Add IFirma tab content to order info template]]></id>
+	<version><![CDATA[1.0.0]]></version>
+	<vqmver><![CDATA[2.3.2]]></vqmver>
+	<author><![CDATA[PowerMedia]]></author>
+	<file path="admin/view/template/sale/" name="order_info.tpl">
+		<operation info="Add IFirma tab content to order info template">
+			<search position="before"><![CDATA[<div id="tab-history" class="vtabs-content">]]></search>
+			<add><![CDATA[<?php if ($isIfiModuleInstalled): ?>
+                            <div id="tab-ifirma" class="vtabs-content" style="margin-top:10px;">
+                            <div id="ifirma-invoices">
+                                <?php if (isset($ifi_configuration_not_set)): ?>
+                                    <div class="attention">
+                                        <?php echo $configuration_not_set_msg ?>
+                                    </div>
+                                <?php else: ?>
+                                    <?php if ($isVat): ?>
+                                            <?php if ($invoice): ?>
+                                                    <a href="<?php echo $get_invoice; ?>&id=<?php echo $invoice["id"]; ?>&h=<?php echo $hash; ?>" style="line-height:16px;"><img src="view/image/pdf.gif"/ style="float:left; margin-right:5px;">Pobierz fakturę krajową &raquo;</a>
+                                                    <br/>
+                                            <?php elseif (!$invoiceSend && !$invoiceProforma) :?>
+                                                    <a href="<?php echo $send_invoice; ?>&id=<?php echo $order_id; ?>&h=<?php echo $hash; ?>&type=<?php echo $actionInvoice; ?>" style="line-height:16px;"><img src="view/image/arrow-black.png" style=" margin-right:5px;"/>Wystaw fakturę krajową &raquo;</a>
+                                                    <br/>
+                                            <?php endif; ?>                                        
+                                            <?php if ($invoiceSend): ?>
+                                                    <a href="<?php echo $get_invoice; ?>&id=<?php echo $invoiceSend["id"]; ?>&h=<?php echo $hash; ?>" style="line-height:16px;"><img src="view/image/pdf.gif"/ style="float:left; margin-right:5px;">Pobierz fakturę wysyłkową &raquo;</a>
+                                                    <br/>
+                                            <?php elseif (!$invoice && !$invoiceProforma): ?>
+                                                    <a href="<?php echo $send_invoice; ?>&id=<?php echo $order_id; ?>&h=<?php echo $hash; ?>&type=<?php echo $actionInvoiceSend; ?>" style="line-height:16px;"><img src="view/image/arrow-black.png" style=" margin-right:5px;"/>Wystaw fakturę wysyłkową &raquo;</a>
+                                                    <br/>
+                                            <?php endif; ?>
+                                            <?php if ($invoiceProforma): ?>
+                                                    <a href="<?php echo $get_invoice; ?>&id=<?php echo $invoiceProforma["id"]; ?>&h=<?php echo $hash; ?>" style="line-height:16px;"><img src="view/image/pdf.gif"/ style="float:left; margin-right:5px;">Pobierz fakturę proforma &raquo;</a>
+                                                    <?php if (!$invoice):?>
+                                                             <br />
+                                                            <a href="<?php echo $send_invoice; ?>&id=<?php echo $invoiceProforma["id"]; ?>&h=<?php echo $hash; ?>&type=<?php echo $actionInvoiceFromProforma; ?>" style="line-height:16px;margin-left:7px;"><img src="view/image/arrow-black.png" style=" margin-right:10px;"/>Wystaw fakturę krajową na podstawie faktury proforma &raquo;</a>
+                                                    <?php endif; ?>
+                                            <?php elseif (!$invoice && !$invoiceSend): ?>
+                                                    <a href="<?php echo $send_invoice; ?>&id=<?php echo $order_id; ?>&h=<?php echo $hash; ?>&type=<?php echo $actionInvoiceProforma; ?>" style="line-height:16px;"><img src="view/image/arrow-black.png" style=" margin-right:5px;"/>Wystaw fakturę proforma &raquo;</a>
+                                            <?php endif; ?>
+                                   <?php else: ?>
+                                            <?php if ($bill): ?>
+                                                    <a href="<?php echo $get_invoice; ?>&id=<?php echo $bill["id"]; ?>&h=<?php echo $hash; ?>" style="line-height:16px;"><img src="view/image/pdf.gif"/ style="float:left;margin-right:5px;">Pobierz rachunek &raquo;</a>
+                                            <?php else: ?>
+                                                    <a href="<?php echo $send_invoice; ?>&id=<?php echo $order_id; ?>&h=<?php echo $hash; ?>&type=<?php echo $actionBill; ?>" style="line-height:16px;"><img src="view/image/arrow-black.png" style=" margin-right:5px;"/>Wystaw rachunek &raquo;</a>
+                                            <?php endif; ?>
+                                   <?php endif; ?>               
+                            <?php endif; ?>
+                            </div>
+                            </div>
+                        <?php endif; ?>]]></add>
+		</operation>
+	</file>
+</modification>
