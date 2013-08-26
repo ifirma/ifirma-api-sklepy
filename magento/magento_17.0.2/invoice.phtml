@@ -1,0 +1,50 @@
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4><?php echo $this->__('Fakturowanie iFirma'); ?></h4>
+    </div>
+    <div class="fieldset fieldset-wide">
+        <?php if(PowerMedia_Ifirma_Model_Configuration::getInstance()->isDefined()): ?>
+			<ul>
+			<?php if(PowerMedia_Ifirma_Model_Configuration::getInstance()->isVAT()): ?>
+				<?php if(Mage::helper('ifirma')->enableToGenerateInvoice()): ?>
+				<li><a href="<?php echo Mage::helper('ifirma')->getSendInvoiceUrl(); ?>"><?php echo $this->__('Wystaw fakturę krajową'); ?></a></li>
+				<?php endif; ?>
+				
+				<?php if(Mage::helper('ifirma')->enableToGenerateInvoiceBasedOnProforma()):?>
+				<li><a href="<?php echo Mage::helper('ifirma')->getSendInvoiceBasedOnProformaUrl();?>"><?php echo $this->__('Wystaw fakturę krajową na podstawie proformy'); ?></a><li>
+				<?php endif; ?>
+					
+				<?php if(Mage::helper('ifirma')->enableToGetInvoice()): ?>
+				<li><a target="_blank" href="<?php echo Mage::helper('ifirma')->getGetInvoiceUrl(); ?>"><?php echo $this->__('Pobierz fakturę'); ?></a></li>
+				<?php endif; ?>
+		
+				<?php if(Mage::helper('ifirma')->enableToGenerateInvoiceSend()): ?>
+				<li><a href="<?php echo Mage::helper('ifirma')->getSendInvoiceSendUrl(); ?>"><?php echo $this->__('Wystaw fakturę wysyłkową'); ?></a></li>
+				<?php endif; ?>
+		
+				<?php if(Mage::helper('ifirma')->enableToGetInvoiceSend()): ?>
+				<li><a target="_blank" href="<?php echo Mage::helper('ifirma')->getGetInvoiceSendUrl(); ?>"><?php echo $this->__('Pobierz fakturę wysyłkową'); ?></a></li>
+				<?php endif; ?>
+		
+				<?php if(Mage::helper('ifirma')->enableToGenerateInvoiceProforma()): ?>
+				<li><a href="<?php echo Mage::helper('ifirma')->getSendInvoiceProformaUrl(); ?>"><?php echo $this->__('Wystaw fakturę proforma'); ?></a></li>
+				<?php endif; ?>
+		
+				<?php if(Mage::helper('ifirma')->enableToGetInvoiceProforma()): ?>
+				<li><a target="_blank" href="<?php echo Mage::helper('ifirma')->getGetInvoiceProformaUrl(); ?>"><?php echo $this->__('Pobierz fakturę proforma'); ?></a></li>
+				<?php endif; ?>
+			<?php else: ?>
+				<?php if(Mage::helper('ifirma')->enableToGenerateBill()): ?>
+				<li><a href="<?php echo Mage::helper('ifirma')->getSendInvoiceBillUrl(); ?>"><?php echo $this->__('Wystaw rachunek'); ?></a></li>
+				<?php endif; ?>
+		
+				<?php if(Mage::helper('ifirma')->enableToGetBill()): ?>
+				<li><a target="_blank" href="<?php echo Mage::helper('ifirma')->getGetInvoiceBillUrl(); ?>"><?php echo $this->__('Pobierz rachunek'); ?></a></li>
+				<?php endif; ?>
+			<?php endif; ?>		
+			</ul>
+		<?php else: ?>
+			<p><?php echo $this->__('Proszę skonfigurować wtyczkę - wygenerować i podać klucze API.'); ?></p>
+		<?php endif; ?>
+    </div>
+</div>

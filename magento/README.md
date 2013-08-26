@@ -1,28 +1,30 @@
+Ostrzeżenie – nie instaluj nowej wersji wtyczki, jeżeli Twój sklep jest już zintegrowany z ifirma.pl (w pzypadku gdy poprzednia wtyczka nie została odinstalowana).
 
+Instrukcja:
+-----------
+ - Wtyczkę instaluje się po zainstalowaniu sklepu
+ - Pobierz wtyczkę www.ifirma.pl/wp-content/uploads/2013/08/ifirma-magento-0.1.0.zip
+ - Zaloguj się do panelu administracyjnego Twojego sklepu
+ - Przejdź do zakładki „System” → „Magento Connect” → „Zarządzanie Magento Connect”
+ - Po zalogowaniu do Magento Connect Managera (dane takie jak do panelu administracyjnego sklepu) jesteś w zakładce „Extensions”. Znajdź na stronie sekcję „Direct package file upload”, wybierz plik (przycisk „Przeglądaj”), który pobrałeś w kroku drugim i kliknij „Upload”. W oknie na dole ekranu powinien pojawić się komunikat:
 
-1. Jeśli masz już swój sklep Magento, przejdź do punktu 2. Jeśli nie masz sklepu - zainstaluj aplikację Magento na swoim hostingu, wybierając do instalacji wersję 1.7.0.2 (wtyczka integracyjna do ifirma.pl została przygotowana właśnie dla tej wersji oprogramowania sklepu). Oprogramowanie sklepu możesz pobrać np. ze strony Magento (http://www.magentocommerce.com/).
+„Package installed:
+community <nazwa_pliku_który_pobrałeś>
+Cleaning cache
+Cache cleaned successfully
 
-2. Pobierz przygotowaną przez ifirma.pl wtyczkę do integracji z Magento z github’a (https://github.com/ifirma/ifirma-api-sklepy/downloads) i zapisz ją na dysku komputera.
+Wróć do panelu administracyjnego sklepu Magento (link „Return to Admin” w prawym górnym rogu ekranu Magento Connect Managera). W panelu administracyjnym wejdź do zakładki „System” → „Konfiguracja” i w menu po lewej stronie ekranu znajdź podmenu (powinno być pierwsze od góry) „IFIRMA” → „Konfiguracja”. W celu skonfigurowania ustawień API uzupełnij pola danymi pobranymi z Twojego konta w ifirma.pl: konfiguracja → integracje i usługi → klucze autoryzacji, sekcja „Symetryczne klucze autoryzacji”:
+    klucz do API – rachunek
+    klucz do API – faktura
+    klucz do API – abonent
+    login do API (login w ifirma.pl).
 
-3. Korzystając z Menedżera FTP (np. FileZilla), w sklepie Magento, który wgrałeś na serwer, przejdź do katalogu o nazwie „local” (ścieżka: app/code/local). Jeśli w app/code nie ma folderu „local”, należy go utworzyć (kliknij prawym przyciskiem myszy > wybierz opcję „utwórz katalog” > nadaj mu nazwę „local” > zatwierdź przyciskiem „OK”). Do katalogu „local” wgraj pobrany z wtyczką folder „PowerMedia”(wgrać cały folder, a nie jego poszczególne pliki).
+Zapisz wprowadzone parametry. Pamiętaj, że jeśli w ifirma.pl przegenerujesz klucze autoryzacji, konieczne będzie wprowadzenie tych nowych kluczy również w konfiguracji API ifirma.pl sklepu Magento. Jeśli chcesz zintegrować z ifirma.pl inne sklepy, wszędzie użyj tych samych kluczy autoryzacji.
 
-4. Następnie do katalogu: app/etc/modules należy wgrać plik PowerMedia_Ifirma.xml, a w katalogu: app/design/adminhtml/default/default/template/sales/order) wgrać pobrany z wtyczką plik totals.phtml – zatwierdzić podmianę i zmienić uprawnienia wgranego pliku na „755”). Żeby edytować uprawnienia pliku z poziomu menedżera FTP: zaznacz plik, kliknij prawym przyciskiem myszy opcję „Prawa pliku”, wprowadź odpowiednią wartość uprawnienia (np. „755”) i zatwierdź przyciskiem „OK”.
+Dla zamówień złożonych w Twoim zintegrowanym z ifirma.pl sklepie (Sprzedaże → Zamówienia) można teraz wystawić fakturę krajową, fakturę wysyłkową lub proforma, która zostanie automatycznie przesłana do ifirma.pl, gdzie będzie można ją zaksięgować.
 
-5. Dla pliku config.ini (ścieżka: app/code/local/PowerMedia/Ifirma/config.ini) zmień uprawnienia na „777”.
-
-6. Plik 001_ifirma_invoice_map.sql (app/code/local/PowerMedia/Ifirma/ifirma) zawiera zapytanie, które należy wysłać do stworzonej bazy danych sklepu Magento:
-skopiowaną treść zapytania wklej do edytora zapytań MySQL z poziomu bazy danych, w phpMyAdmin: zakładka „SQL”, okno „wykonanie zapytań SQL do bazy danych”
-jeśli tabela Twojego sklepu Magento zawiera prefiks (np. „mage”), dodaj nazwę prefiksa we wklejonym zapytaniu (dotychczasowe „CREATE TABLE `ifirma`” przyjmię formę „CREATE TABLE `mage_ifirma`”);
- zatwierdź przesłanie zapytania przyciskiem „wykonaj”. Utworzone zostaną tabele potrzebne do integracji.
-
-7. Teraz zaloguj się do panelu administratora sklepu i wyczyść cache Magento: System > Zarządzanie cache > „Flush Magento Cache”.
-
-8. Pozostając w panelu administracyjnym sklepu Magento przejdź do zakładki „iFirma” > konfiguracja API. W celu skonfigurowania ustawień API, uzupełnij pola danymi pobranymi z Twojego konta w ifirma.pl (jeśli nie masz konta w ifirma.pl - zarejestruj się na https://www.ifirma.pl/cgi-bin/WebObjects/ifirma.woa/wa/register): administracja > ustawienia > ustawienia > klucze autoryzacji, sekcja „symetryczne klucze autoryzacji”):
-
-klucz do API - faktura,
-klucz do API - abonent
-login do API (login w ifirma.pl),
-
-Zapisz wprowadzone parametry. Pamiętaj, że jeśli w ifirma.pl przegenerujesz klucze autoryzacji, konieczne będzie wprowadzenie tych nowych kluczy również w konfiguracji API ifirma.pl sklepu Magento - zgodnie ze schematem przedstawionym w punkcie 8. Jeśli chcesz zintegrować z ifirma.pl inne sklepy, wszędzie użyj tych samych kluczy autoryzacji.
-
-9. Dla zamówień złożonych w Twoim zintegrowanym z ifirma.pl sklepie (Sprzedaże > Zamówienia) można teraz wystawić fakturę (lub fakturę wysyłkową), która zostanie automatycznie przesłana do ifirma.pl, gdzie będzie można ją zaksięgować.
+Uwagi:
+------
+ - polskie stawki VAT(23%, 8%, 5%, 0%) należy samodzielnie zdefiniować w konfiguracji sklepu
+ - nie ma możliwości ustawienia stawki VAT 'zw' (sklep nie daje możliwości zdefiniowana stawki z wartością inną niż liczba)
+ - sprzedaż w walucie obsługiwana jest na zasadzie 1:1, czyli w sklepie 1USD = 1PLN na fakturze
