@@ -65,6 +65,7 @@ abstract class PowerMedia_Ifirma_Model_Builder_StrategyAbstract {
 		$contractor->{ifirma\InvoiceContractor::KEY_ULICA} = $this->getOrder()->getBillingAddress()->getStreetFull();
 		$contractor->{ifirma\InvoiceContractor::KEY_TELEFON} = $this->getOrder()->getBillingAddress()->getTelephone();
 		$contractor->{ifirma\InvoiceContractor::KEY_OSOBA_FIZYCZNA} = true;
+		$contractor->{ifirma\InvoiceContractor::KEY_KRAJ} = $this->getOrder()->getBillingAddress()->getCountryModel()->getName();
 		
 		return $contractor;
 	}
