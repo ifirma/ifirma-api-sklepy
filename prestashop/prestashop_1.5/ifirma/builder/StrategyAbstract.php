@@ -82,6 +82,7 @@ abstract class StrategyAbstract {
 		$contractor->{InvoiceContractor::KEY_MIEJSCOWOSC} = $this->_address->city;
 		$contractor->{InvoiceContractor::KEY_NIP} = (!empty($this->_address->vat_number) ? $this->_address->vat_number : null);
 		$contractor->{InvoiceContractor::KEY_ULICA} = $this->_address->address1 . ' ' . $this->_address->address2;
+		$contractor->{InvoiceContractor::KEY_EMAIL} = $this->_customer->email;
 		$contractor->{InvoiceContractor::KEY_TELEFON} = (
 				empty($this->_address->phone_mobile)
 				?
