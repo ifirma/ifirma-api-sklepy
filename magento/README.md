@@ -1,6 +1,6 @@
 Ostrzeżenie – nie instaluj nowej wersji wtyczki, jeżeli Twój sklep jest już zintegrowany z ifirma.pl (w pzypadku gdy poprzednia wtyczka nie została odinstalowana).
 
-Wtyczka kompatybilna z Magento w 1.8+ oraz 1.9+
+Wtyczka kompatybilna z Magento w wersji 1.8+ oraz 1.9+
 
 Instrukcja:
 -----------
