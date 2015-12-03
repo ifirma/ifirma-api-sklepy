@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+	<adminhtml_sales_order_view>
+		<reference name="sales_order_tabs">
+			<action method="addTab">
+				<name>ifirma</name>
+				<block>ifirma/</block>
+			</action>
+		</reference>
+	</adminhtml_sales_order_view>
+</layout>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+		<ifirma_tab translate="label" module="ifirma">
+			<label>iFirma</label>
+			<sort_order>1</sort_order>
+		</ifirma_tab>
+	</tabs>
+
+	<sections>
+		<ifirma_section translate="label" module="ifirma">
+			<class>separator-top</class>
+			<label>Konfiguracja</label>
+			<tab>ifirma_tab</tab>
+			<sort_order>130</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<ifirma_vat>
+					<label>Płatnik VAT</label>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<vat_option translate="label">
+							<label>Jestem płatnikiem podatku VAT</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</vat_option>
+						<podstawa_prawna translate="label">
+							<label>Podstawa prawna zwolnienia z VAT</label>
+                            <depends><vat_option>0</vat_option></depends>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</podstawa_prawna>
+					</fields>
+				</ifirma_vat>
+				<ifirma_api_keys>
+					<label>Klucze API</label>
+					<sort_order>2</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<bill_option translate="label">
+							<label>Klucz do API - rachunek</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</bill_option>
+						<invoice_option translate="label">
+							<label>Klucz fo API - faktura</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</invoice_option>
+						<subscriber_option>
+							<label>Klucz do API - abonent</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</subscriber_option>
+						<login_option>
+							<label>Login Ifirma</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</login_option>
+					</fields>
+				</ifirma_api_keys>
+
+				<ifirma_ryczalt>
+					<label>Ryczałt ewidencjonowany</label>
+					<sort_order>2</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<ryczalt_option translate="label">
+							<label>Rozliczanie ryczałtem</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</ryczalt_option>
+                        <ryczalt_rate translate="label">
+							<label>Stawka ryczałtu</label>
+                            <depends><ryczalt_option>1</ryczalt_option></depends>
+							<frontend_type>select</frontend_type>
+                            <source_model>PowerMedia_Ifirma_Model_RyczaltRates</source_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </ryczalt_rate>
+                        <wpis_do_ewidencji translate="label">
+							<label>Wpis do ewidencji</label>
+                            <depends><ryczalt_option>1</ryczalt_option></depends>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </wpis_do_ewidencji>
+
+					</fields>
+				</ifirma_ryczalt>
+
+				<ifirma_opcje>
+					<label>Opcje</label>
+					<sort_order>4</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<miejsce_wystawienia translate="label">
+							<label>Miejsce wystawienia faktury</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</miejsce_wystawienia>
+						<nazwa_serii_numeracji translate="label">
+							<label>Nazwa serii numeracji</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</nazwa_serii_numeracji>
+					</fields>
+				</ifirma_opcje>
+			</groups>
+		</ifirma_section>
+	</sections>
+</config>
