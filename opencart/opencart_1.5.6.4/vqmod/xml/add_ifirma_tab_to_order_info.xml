@@ -1,0 +1,28 @@
+<modification>
+	<id><![CDATA[Add IFirma tab to order info template]]></id>
+	<version><![CDATA[1.0.0]]></version>
+	<vqmver><![CDATA[2.3.2]]></vqmver>
+	<author><![CDATA[PowerMedia]]></author>
+	<file path="admin/view/template/sale/" name="order_info.tpl">
+		<operation info="Add IFirma tab to order info template">
+			<ignoreif><![CDATA[<li><a href="#tab-history" data-toggle="tab"><?php echo $tab_history; ?></a></li>]]></ignoreif>
+			<search position="after"><![CDATA[<a href="#tab-history"><?php echo $tab_history; ?></a>]]></search>
+			<add><![CDATA[<?php if ($isIfiModuleInstalled): ?><a href="#tab-ifirma"><?php echo $tab_ifirma; ?></a><?php endif; ?>]]></add>
+		</operation>
+		<operation info="Add IFirma tab to order info template - OpenCart 2.0">
+			<ignoreif><![CDATA[<a href="#tab-history"><?php echo $tab_history; ?></a>]]></ignoreif>
+			<search position="after"><![CDATA[<li><a href="#tab-history" data-toggle="tab"><?php echo $tab_history; ?></a></li>]]></search>
+			<add><![CDATA[<?php if ($isIfiModuleInstalled): ?><li><a href="#tab-ifirma" data-toggle="tab"><?php echo $tab_ifirma; ?></a></li><?php endif; ?>]]></add>
+		</operation>
+		<operation info="Add flash box">
+			<ignoreif><![CDATA[<div class="panel panel-default">]]></ignoreif>
+			<search position="before"><![CDATA[<div class="box">]]></search>
+			<add><![CDATA[<?php if ($isIfiModuleInstalled): ?><?php if (isset($error_warning)):?><div class="warning"><?php echo $error_warning; ?></div><?php endif; ?><?php if (isset($success)):?><div class="success"><?php echo $success; ?></div><?php endif; ?><?php endif; ?>]]></add>
+		</operation>
+		<operation info="Add flash box - OpenCart 2.0">
+			<ignoreif><![CDATA[<div class="box">]]></ignoreif>
+			<search position="before"><![CDATA[<div class="panel panel-default">]]></search>
+			<add><![CDATA[<?php if ($isIfiModuleInstalled): ?><?php if (isset($error_warning)):?><div class="alert alert-warning"><i class="fa fa-exclamation-circle"></i> <?php echo $error_warning; ?><button type="button" class="close" data-dismiss="alert">&times;</button></div><?php endif; ?><?php if (isset($success)):?><div class="alert alert-success"><i class="fa fa-check-circle"></i> <?php echo $success; ?><button type="button" class="close" data-dismiss="alert">&times;</button></div><?php endif; ?><?php endif; ?>]]></add>
+		</operation>
+	</file>
+</modification>

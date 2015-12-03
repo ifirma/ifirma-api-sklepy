@@ -1,0 +1,18 @@
+<modification>
+	<id><![CDATA[Add IFirma tab label to order controller]]></id>
+	<version><![CDATA[1.0.0]]></version>
+	<vqmver><![CDATA[2.3.2]]></vqmver>
+	<author><![CDATA[PowerMedia]]></author>
+	<file path="admin/controller/sale/" name="order.php">
+		<operation info="Add IFirma tab to order info template">
+			<ignoreif><![CDATA[$data['tab_history'] = $this->language->get('tab_history');]]></ignoreif>
+			<search position="after"><![CDATA[$this->data['tab_history'] = $this->language->get('tab_history');]]></search>
+			<add><![CDATA[$this->language->load('module/ifi_invoice');$this->data['tab_ifirma'] = $this->language->get('tab_ifirma');$this->language->load('sale/order');]]></add>
+		</operation>
+		<operation info="Add IFirma tab to order info template - OpenCart 2.0">
+			<ignoreif><![CDATA[$this->data['tab_history'] = $this->language->get('tab_history');]]></ignoreif>
+			<search position="after"><![CDATA[$data['tab_history'] = $this->language->get('tab_history');]]></search>
+			<add><![CDATA[$this->language->load('module/ifi_invoice');$data['tab_ifirma'] = $this->language->get('tab_ifirma');$this->language->load('sale/order');]]></add>
+		</operation>
+	</file>
+</modification>
