@@ -237,7 +237,6 @@ abstract class StrategyAbstract {
 		$tax = \Tax::getCarrierTaxRate($shipping['id_carrier'], $this->_order->id_address_delivery);
 		
 		$invoicePosition->{InvoicePosition::KEY_JEDNOSTKA} = self::DEFAULT_SHIPPING_UNIT_NAME;
-		$invoicePosition->{InvoicePosition::KEY_STAWKA_VAT} = (string)($tax/100);
 		$invoicePosition->{InvoicePosition::KEY_ILOSC} = 1;
 		$invoicePosition->{InvoicePosition::KEY_CENA_JEDNOSTKOWA} = $this->_roundPrice($shipping['shipping_cost_tax_incl']);
 		$invoicePosition->{InvoicePosition::KEY_NAZWA_PELNA} = self::SHIPPING_NAME_PREFIX . $shipping['state_name'];
@@ -250,7 +249,7 @@ abstract class StrategyAbstract {
 			$invoicePosition->{InvoicePosition::KEY_STAWKA_VAT} = null;
 			$invoicePosition->{InvoicePosition::KEY_TYP_STAWKI_VAT} = InvoicePosition::DEFAULT_VALUE_TYP_STAWKI_VAT_ZW;
 		}else{
-			$invoicePosition->{InvoicePosition::KEY_STAWKA_VAT} = (string)($product['tax_rate']/100);
+			$invoicePosition->{InvoicePosition::KEY_STAWKA_VAT} = (string)($tax/100);
 			$invoicePosition->{InvoicePosition::KEY_TYP_STAWKI_VAT} = InvoicePosition::DEFAULT_VALUE_TYP_STAWKI_VAT;
 		}
 		
