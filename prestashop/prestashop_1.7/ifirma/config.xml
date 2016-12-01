@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>ifirma</name>
+    <displayName><![CDATA[Integracja z ifirma.pl]]></displayName>
+    <version><![CDATA[1.0]]></version>
+    <description><![CDATA[Wystawiaj faktury w ifirma.pl]]></description>
+    <author><![CDATA[Power Media S.A.]]></author>
+    <tab><![CDATA[billing_invoicing]]></tab>
+	<confirmUninstall><![CDATA[Czy napewno usunąc integrację z serwisem ifirma.pl? Dane na temat historii wystawionych faktur zostaną bezpowrowtnie usunięte.]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>1</need_instance>
+	<limited_countries>pl</limited_countries>
+</module>
