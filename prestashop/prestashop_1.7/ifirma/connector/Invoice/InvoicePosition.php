@@ -36,6 +36,9 @@ class InvoicePosition extends DataContainer implements ToArrayInterface, ToJsonI
 	 * @return array
 	 */
 	public function getSupportedKeys() {
+		
+		
+		
 		return array(
 			self::KEY_CENA_JEDNOSTKOWA,
 			self::KEY_ILOSC,
@@ -63,6 +66,7 @@ class InvoicePosition extends DataContainer implements ToArrayInterface, ToJsonI
 	 * @return array
 	 */
 	public function toArray(){
+
 		return array(
 			self::KEY_CENA_JEDNOSTKOWA => $this->{self::KEY_CENA_JEDNOSTKOWA},
 			self::KEY_ILOSC => $this->{self::KEY_ILOSC},

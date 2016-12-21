@@ -179,7 +179,6 @@ class Ifirma extends Module {
 	
 	
 	
-	
 	/**
 	 * 
 	 * @return string
@@ -281,6 +280,10 @@ class Ifirma extends Module {
 	 * @return string
 	 */
 	public function displayWarning($msg){
+		
+		
+
+		
 		$output = '
 		<div class="module_confirmation conf warn">
 			'.$msg.'

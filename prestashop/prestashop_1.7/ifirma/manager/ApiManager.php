@@ -255,7 +255,7 @@ class ApiManager {
 		
 		if(intval(round($order->total_paid * 100)) !== $invoiceTotal){
 			InternalComunicationManager::getInstance()->{InternalComunicationManager::KEY_INVOICE_VALIDATION_MESAGE}
-			 = "Wykryto drobne nieprawidlowosci. Możliwa przyczyna: rónica w sposobie zaokrąglania kwoty podatku lub naliczenie niebsługiwanego rabatu. " .
+			 = "Wykryto drobne nieprawidłowości. Możliwa przyczyna: różnica w sposobie zaokrąglania kwoty podatku lub naliczenie niebsługiwanego rabatu. " .
 			"Proszę dokonać weryfikacji poprawności wystawionej faktury z poziomu serwisu <a target=\"_blank\" href=\"http://www.ifirma.pl\">ifirma.pl</a>";
 		}
 	}

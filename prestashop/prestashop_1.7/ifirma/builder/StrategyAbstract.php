@@ -6,6 +6,7 @@ require_once dirname(__FILE__) . '/../connector/Invoice/InvoiceAbstract.php';
 require_once dirname(__FILE__) . '/../connector/Invoice/InvoiceContractor.php';
 require_once dirname(__FILE__) . '/../connector/Invoice/InvoicePosition.php';
 
+
 /**
  * Description of StrategyAbstract
  *
@@ -166,6 +167,12 @@ abstract class StrategyAbstract {
 	protected function _createInvoicePosition(array $product){
 		$invoicePosition = new InvoicePosition();
 		
+				//$lol =  $this->{self::KEY_CENA_JEDNOSTKOWA};
+			  echo '<script>';
+			  echo 'console.log(\'StrategyAbstract.php\')';
+			  echo 'console.log(\'cena jednostowka:\')';
+			  echo '</script>';
+		
 		$invoicePosition->{InvoicePosition::KEY_JEDNOSTKA} = (
 				isset($product['unity']) && $product['unity'] != ''
 				?
@@ -188,6 +195,7 @@ abstract class StrategyAbstract {
 			$invoicePosition->{InvoicePosition::KEY_PKWiU} = "";
 		}else{
 			$invoicePosition->{InvoicePosition::KEY_STAWKA_VAT} = (string)($product['tax_rate']/100);
+
 			$invoicePosition->{InvoicePosition::KEY_TYP_STAWKI_VAT} = InvoicePosition::DEFAULT_VALUE_TYP_STAWKI_VAT;
 		}
 		
@@ -200,16 +208,24 @@ abstract class StrategyAbstract {
 	 * @param int $precision
 	 * @return string
 	 */
-	protected function _roundPrice($price, $precision = 2){
+	
+
+
+		protected function _roundPrice($price, $precision = 2){
+
+
 		$price = (string)$price;
-		
+
 		$dotPosition = strpos($price, '.');
 		if(!$dotPosition){
+			
 			return $price;
 		}
-		
-		return substr($price, 0, $dotPosition + $precision + 1);
+			
+		return round($price, 2);
+				
 	}
+	
 	
 	/**
 	 * 

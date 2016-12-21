@@ -1,7 +1,7 @@
 {$processMessage}
 
 <div class="warn">
-	Moduł <b>nie</b> posida wsparcia dla rabatów procentowych i kwotowych.
+	Moduł <b>nie</b> posiada wsparcia dla rabatów procentowych i kwotowych.
 </div>
 
 <form action="{$formAction}" method="post" class="width4" style="margin: 0 auto;">
