@@ -159,11 +159,14 @@ class Ifirma extends Module {
 			'apiRyczaltRatesLabels'	=> $this->rates_label,
 			
 			'apiBillName'		=> self::API_KEY_BILL,
-			'apiBillValue'		=> Tools::safeOutput(Tools::getValue(self::API_KEY_BILL, Configuration::get(self::API_KEY_BILL))),
+			
+			'apiBillValue'		=> preg_replace('/\s+/', '', Tools::safeOutput(Tools::getValue(self::API_KEY_BILL, Configuration::get(self::API_KEY_BILL)))),
+			
 			'apiInvoiceName'	=> self::API_KEY_INVOICE,
-			'apiInvoiceValue'	=> Tools::safeOutput(Tools::getValue(self::API_KEY_INVOICE, Configuration::get(self::API_KEY_INVOICE))),
+			'apiInvoiceValue'	=> preg_replace('/\s+/', '', Tools::safeOutput(Tools::getValue(self::API_KEY_INVOICE, Configuration::get(self::API_KEY_INVOICE)))),
 			'apiSubscriberName' => self::API_KEY_SUBSCRIBER,
-			'apiSubscriberValue'=> Tools::safeOutput(Tools::getValue(self::API_KEY_SUBSCRIBER, Configuration::get(self::API_KEY_SUBSCRIBER))),
+
+			'apiSubscriberValue'=> preg_replace('/\s+/', '', Tools::safeOutput(Tools::getValue(self::API_KEY_SUBSCRIBER, Configuration::get(self::API_KEY_SUBSCRIBER)))),
 			'apiLoginName'		=> self::API_LOGIN,
 			'apiLoginValue'		=> Tools::safeOutput(Tools::getValue(self::API_LOGIN, Configuration::get(self::API_LOGIN))),
 				
@@ -173,11 +176,10 @@ class Ifirma extends Module {
 			'apiSeriesName'		=> self::API_KEY_NAZWA_SERII_NUMERACJI,
 			'apiSeriesValue'	=> Tools::safeOutput(Tools::getValue(self::API_KEY_NAZWA_SERII_NUMERACJI, Configuration::get(self::API_KEY_NAZWA_SERII_NUMERACJI))),
 		));
-		
 		return $this->display(__FILE__, 'views/conf.tpl');
 	}
 	
-	
+
 	
 	/**
 	 * 
@@ -193,9 +195,9 @@ class Ifirma extends Module {
 			Configuration::updateValue(self::API_RYCZALT, Tools::getValue(self::API_RYCZALT));
 			Configuration::updateValue(self::API_RYCZALT_WPIS_DO_EWIDENCJI, Tools::getValue(self::API_RYCZALT_WPIS_DO_EWIDENCJI));
 			Configuration::updateValue(self::API_RYCZALT_RATE, Tools::getValue(self::API_RYCZALT_RATE));
-			Configuration::updateValue(self::API_KEY_BILL, Tools::getValue(self::API_KEY_BILL));
-			Configuration::updateValue(self::API_KEY_INVOICE, Tools::getValue(self::API_KEY_INVOICE));
-			Configuration::updateValue(self::API_KEY_SUBSCRIBER, Tools::getValue(self::API_KEY_SUBSCRIBER));
+			Configuration::updateValue(self::API_KEY_BILL, preg_replace('/\s+/', '', Tools::getValue(self::API_KEY_BILL)));
+			Configuration::updateValue(self::API_KEY_INVOICE, preg_replace('/\s+/', '',Tools::getValue(self::API_KEY_INVOICE)));
+			Configuration::updateValue(self::API_KEY_SUBSCRIBER, preg_replace('/\s+/', '',Tools::getValue(self::API_KEY_SUBSCRIBER)));
 			Configuration::updateValue(self::API_LOGIN, Tools::getValue(self::API_LOGIN));
 			Configuration::updateValue(self::API_KEY_MIEJSCE_WYSTAWIENIA, Tools::getValue(self::API_KEY_MIEJSCE_WYSTAWIENIA));
 			Configuration::updateValue(self::API_KEY_NAZWA_SERII_NUMERACJI, Tools::getValue(self::API_KEY_NAZWA_SERII_NUMERACJI));
@@ -206,6 +208,7 @@ class Ifirma extends Module {
 		return $message;
 	}
 	
+
 
 	/**
 	 * 
@@ -280,9 +283,6 @@ class Ifirma extends Module {
 	 * @return string
 	 */
 	public function displayWarning($msg){
-		
-		
-
 		
 		$output = '
 		<div class="module_confirmation conf warn">
