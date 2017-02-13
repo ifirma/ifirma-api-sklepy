@@ -35,7 +35,6 @@ class Invoice extends InvoiceAbstract{
 			self::KEY_UWAGI => $this->{self::KEY_UWAGI},
 			self::KEY_WIDOCZNY_NUMER_GIOS => $this->{self::KEY_WIDOCZNY_NUMER_GIOS},
 			self::KEY_NUMER => $this->{self::KEY_NUMER},
-			//$ver = '1.7',
 		
 		));
 	}
@@ -64,7 +63,6 @@ class Invoice extends InvoiceAbstract{
 			self::KEY_UWAGI,
 			self::KEY_WIDOCZNY_NUMER_GIOS,
 			self::KEY_NUMER
-			//,$ver
 		);
 	}
 	
