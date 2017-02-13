@@ -1,6 +1,7 @@
 <?php
 
 namespace ifirma;
+require_once dirname(__FILE__) . '/../../ifirma.php';
 
 require_once dirname(__FILE__) . '/../IfirmaException.php';
 require_once dirname(__FILE__) . '/../DataContainer.php';
@@ -160,7 +161,8 @@ abstract class ConnectorAbstract {
 		return array(
 			'Accept: application/'.$connectionFileType,
 			'Content-type: application/'.$connectionFileType.'; charset=UTF-8',
-			'Authentication: IAPIS user='.$this->_getConfig()->{Config::API_LOGIN}.', hmac-sha1='.$messageHash
+			'User-Agent: PrestaShop/'._PS_VERSION_.'; ifirma_module/'.\Ifirma::MODULE_VERSION,
+			'Authentication: IAPIS user='.$this->_getConfig()->{Config::API_LOGIN}.', hmac-sha1='.$messageHash,	
 		);
 	}
 	
@@ -349,7 +351,7 @@ abstract class ConnectorAbstract {
 		curl_setopt($this->_currentCurl, CURLOPT_CONNECTTIMEOUT, self::CURLOPT_CONNECTTIMEOUT_VALUE);
 		curl_setopt($this->_currentCurl, CURLOPT_URL, $url);
 		curl_setopt($this->_currentCurl, CURLOPT_RETURNTRANSFER, self::CURLOPT_RETURNTRANSFER_VALUE);
-		curl_setopt($this->_currentCurl, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($this->_currentCurl, CURLOPT_HTTPHEADER, $headers);	
 		curl_setopt($this->_currentCurl, CURLOPT_SSL_VERIFYHOST, self::CURLOPT_SSL_VERIFYHOST_VALUE);
 		curl_setopt($this->_currentCurl, CURLOPT_SSL_VERIFYPEER, self::CURLOPT_SSL_VERIFYPEER_VALUE);  
 		

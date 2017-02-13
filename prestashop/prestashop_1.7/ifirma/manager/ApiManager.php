@@ -295,6 +295,12 @@ class ApiManager {
 		$newInvoiceObj = Invoice::get($newInvoiceId);
 		$newInvoiceMapObj->updateInvoiceNumber(Invoice::filterNumber($newInvoiceObj->{InvoiceResponse::KEY_PELNY_NUMER}));
 		
+		$headers = apache_request_headers();
+
+		foreach ($headers as $header => $value) {
+					$headersText = 	$headersText . ' | ' . $header . ':' .  $value;
+	}
+		
 		return SendResult::makeValidResponse(
 			$sendInvoiceResult->getMessage() !== ''
 			?

@@ -34,7 +34,8 @@ class Invoice extends InvoiceAbstract{
 			self::KEY_PODPIS_WYSTAWCY => $this->{self::KEY_PODPIS_WYSTAWCY},
 			self::KEY_UWAGI => $this->{self::KEY_UWAGI},
 			self::KEY_WIDOCZNY_NUMER_GIOS => $this->{self::KEY_WIDOCZNY_NUMER_GIOS},
-			self::KEY_NUMER => $this->{self::KEY_NUMER}
+			self::KEY_NUMER => $this->{self::KEY_NUMER},
+			//$ver = '1.7',
 		
 		));
 	}
@@ -63,6 +64,7 @@ class Invoice extends InvoiceAbstract{
 			self::KEY_UWAGI,
 			self::KEY_WIDOCZNY_NUMER_GIOS,
 			self::KEY_NUMER
+			//,$ver
 		);
 	}
 	
@@ -117,7 +119,7 @@ class Invoice extends InvoiceAbstract{
 		$invoice->disableSendMethod();
 		
 		ConnectorAbstract::factory($invoice)->receive($id);
-		
+
 		return $invoice;
 	}
 }

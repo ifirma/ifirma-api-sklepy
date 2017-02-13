@@ -167,12 +167,6 @@ abstract class StrategyAbstract {
 	protected function _createInvoicePosition(array $product){
 		$invoicePosition = new InvoicePosition();
 		
-				//$lol =  $this->{self::KEY_CENA_JEDNOSTKOWA};
-			  echo '<script>';
-			  echo 'console.log(\'StrategyAbstract.php\')';
-			  echo 'console.log(\'cena jednostowka:\')';
-			  echo '</script>';
-		
 		$invoicePosition->{InvoicePosition::KEY_JEDNOSTKA} = (
 				isset($product['unity']) && $product['unity'] != ''
 				?

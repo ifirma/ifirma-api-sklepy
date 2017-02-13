@@ -24,6 +24,8 @@ require_once dirname(__FILE__) . '/manager/InternalComunicationManager.php';
  */
 class Ifirma extends Module {
 	
+	const MODULE_VERSION = '1.7';
+	
 	const API_VAT = 'ifirma_api_vat';
 	const API_PODSTAWA_PRAWNA = 'ifirma_api_podstawa_prawna';
 	const API_RYCZALT = 'ifirma_api_ryczalt';
@@ -48,9 +50,10 @@ class Ifirma extends Module {
 	var $rates_label = array('3%', '5,5%', '8,5%', '17%', '20%');
 	
 	public function __construct() {
+		
 		$this->name = 'ifirma';
 		$this->tab = 'billing_invoicing';
-		$this->version = '1.0';
+		$this->version = self::MODULE_VERSION;
 		$this->author = 'Power Media S.A.';
 		$this->limited_countries = array('pl');
 
@@ -117,6 +120,11 @@ class Ifirma extends Module {
 	/**
 	 * Module configuration
 	 */
+	private function removeWhitespaces($string){
+			return preg_replace('/\s+/', '', $string);
+	}
+	
+
 	public function getContent(){
 		$processMessage = $this->_processConfiguration();
 		$this->context->controller->addJS($this->_path.'js/ifirma.js');
@@ -160,13 +168,13 @@ class Ifirma extends Module {
 			
 			'apiBillName'		=> self::API_KEY_BILL,
 			
-			'apiBillValue'		=> preg_replace('/\s+/', '', Tools::safeOutput(Tools::getValue(self::API_KEY_BILL, Configuration::get(self::API_KEY_BILL)))),
+			'apiBillValue'		=> $this->removeWhitespaces(Tools::safeOutput(Tools::getValue(self::API_KEY_BILL, Configuration::get(self::API_KEY_BILL)))),
 			
 			'apiInvoiceName'	=> self::API_KEY_INVOICE,
-			'apiInvoiceValue'	=> preg_replace('/\s+/', '', Tools::safeOutput(Tools::getValue(self::API_KEY_INVOICE, Configuration::get(self::API_KEY_INVOICE)))),
+			'apiInvoiceValue'	=> $this->removeWhitespaces(Tools::safeOutput(Tools::getValue(self::API_KEY_INVOICE, Configuration::get(self::API_KEY_INVOICE)))),
 			'apiSubscriberName' => self::API_KEY_SUBSCRIBER,
 
-			'apiSubscriberValue'=> preg_replace('/\s+/', '', Tools::safeOutput(Tools::getValue(self::API_KEY_SUBSCRIBER, Configuration::get(self::API_KEY_SUBSCRIBER)))),
+			'apiSubscriberValue'=> $this->removeWhitespaces(Tools::safeOutput(Tools::getValue(self::API_KEY_SUBSCRIBER, Configuration::get(self::API_KEY_SUBSCRIBER)))),
 			'apiLoginName'		=> self::API_LOGIN,
 			'apiLoginValue'		=> Tools::safeOutput(Tools::getValue(self::API_LOGIN, Configuration::get(self::API_LOGIN))),
 				
@@ -179,6 +187,7 @@ class Ifirma extends Module {
 		return $this->display(__FILE__, 'views/conf.tpl');
 	}
 	
+
 
 	
 	/**
@@ -195,9 +204,9 @@ class Ifirma extends Module {
 			Configuration::updateValue(self::API_RYCZALT, Tools::getValue(self::API_RYCZALT));
 			Configuration::updateValue(self::API_RYCZALT_WPIS_DO_EWIDENCJI, Tools::getValue(self::API_RYCZALT_WPIS_DO_EWIDENCJI));
 			Configuration::updateValue(self::API_RYCZALT_RATE, Tools::getValue(self::API_RYCZALT_RATE));
-			Configuration::updateValue(self::API_KEY_BILL, preg_replace('/\s+/', '', Tools::getValue(self::API_KEY_BILL)));
-			Configuration::updateValue(self::API_KEY_INVOICE, preg_replace('/\s+/', '',Tools::getValue(self::API_KEY_INVOICE)));
-			Configuration::updateValue(self::API_KEY_SUBSCRIBER, preg_replace('/\s+/', '',Tools::getValue(self::API_KEY_SUBSCRIBER)));
+			Configuration::updateValue(self::API_KEY_BILL, $this->removeWhitespaces(Tools::getValue(self::API_KEY_BILL)));
+			Configuration::updateValue(self::API_KEY_INVOICE, $this->removeWhitespaces(Tools::getValue(self::API_KEY_INVOICE)));
+			Configuration::updateValue(self::API_KEY_SUBSCRIBER, $this->removeWhitespaces(Tools::getValue(self::API_KEY_SUBSCRIBER)));
 			Configuration::updateValue(self::API_LOGIN, Tools::getValue(self::API_LOGIN));
 			Configuration::updateValue(self::API_KEY_MIEJSCE_WYSTAWIENIA, Tools::getValue(self::API_KEY_MIEJSCE_WYSTAWIENIA));
 			Configuration::updateValue(self::API_KEY_NAZWA_SERII_NUMERACJI, Tools::getValue(self::API_KEY_NAZWA_SERII_NUMERACJI));
@@ -207,6 +216,9 @@ class Ifirma extends Module {
 		
 		return $message;
 	}
+	
+	
+
 	
 
 
@@ -295,8 +307,7 @@ class Ifirma extends Module {
 	 * @return string
 	 */
 	private function _getSendResultMessage(){
-		
-
+	
 		$sendResult = ifirma\InternalComunicationManager::getInstance()->{ifirma\InternalComunicationManager::KEY_SEND_RESULT};
 		if($sendResult === null){
 			return '';

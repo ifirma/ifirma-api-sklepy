@@ -31,7 +31,7 @@ class ConnectorInvoice extends ConnectorAbstract{
 		
 		$this->_setCurlPostOptions(
 			self::API_INVOICE_URL,
-			$this->_getRequestHeaders($messageHash), 
+			$this->_getRequestHeaders($messageHash),
 			$content
 		);
 		
@@ -39,7 +39,6 @@ class ConnectorInvoice extends ConnectorAbstract{
 	}
 	
 	/**
-	 * 
 	 * @param int $id
 	 * @return \ifirma\ConnectorInvoice
 	 */

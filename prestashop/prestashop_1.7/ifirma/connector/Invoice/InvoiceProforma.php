@@ -64,7 +64,8 @@ class InvoiceProforma extends InvoiceAbstract{
 			self::KEY_NUMER => $this->{self::KEY_NUMER},
 			self::KEY_NUMER_ZAMOWIENIA => $this->{self::KEY_NUMER_ZAMOWIENIA},
 			self::KEY_TYP_FAKTURY_KRAJOWEJ => $this->{self::KEY_TYP_FAKTURY_KRAJOWEJ},
-			self::KEY_NAZWA_SERII_NUMERACJI => $this->{self::KEY_NAZWA_SERII_NUMERACJI}			
+			self::KEY_NAZWA_SERII_NUMERACJI => $this->{self::KEY_NAZWA_SERII_NUMERACJI},
+						
 		));
 	}
 	

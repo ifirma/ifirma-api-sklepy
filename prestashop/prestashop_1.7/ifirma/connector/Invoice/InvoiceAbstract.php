@@ -35,6 +35,7 @@ abstract class InvoiceAbstract extends DataContainer implements ToJsonInterface{
 	const KEY_WIDOCZNY_NUMER_GIOS = 'WidocznyNumerGios';
 	const KEY_NUMER = 'Numer';
 	
+	
 	const VALID_DATE_FORMAT = '/^\d{4}-\d{2}-\d{2}$/'; // RRRR-MM-DD
 	
 	const DEFAULT_VALUE_RODZAJ_PODPISU_ODBIORCY = 'BPO';
@@ -189,7 +190,6 @@ abstract class InvoiceAbstract extends DataContainer implements ToJsonInterface{
 		} else {
 			$this->{self::KEY_POZYCJE} = array_merge($this->{self::KEY_POZYCJE}, array($position));
 		}
-		
 		return $this;
 	}
 	

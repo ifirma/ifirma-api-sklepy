@@ -30,6 +30,8 @@ class StrategyInvoiceProforma extends StrategyAbstract{
 		$invoice->{InvoiceProforma::KEY_TYP_FAKTURY_KRAJOWEJ} = InvoiceProforma::DEFAULT_VALUE_TYP_FAKTURY_KRAJOWEJ;
 		$invoice->{InvoiceProforma::KEY_MIEJSCE_WYSTAWIENIA} = $this->_getConfig()->{Config::API_MIEJSCE_WYSTAWIENIA};
 		$invoice->{InvoiceProforma::KEY_NAZWA_SERII_NUMERACJI} = $this->_getConfig()->{Config::API_NAZWA_SERII_NUMERACJI};
+		//nvoice->{InvoiceProforma::KEY_WERSJA_MODULU} = '1.7';
+
 		
 		foreach($this->_order->getProducts() as $product){
 			$invoice->addInvoicePosition($this->_createInvoicePosition($product));
